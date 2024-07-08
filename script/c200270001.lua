@@ -19,8 +19,8 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(sg,REASON_COST)
 end
 
-function s.spfilter(c)
-	return c:IsLevelAbove(7)
+function s.spfilter(c,e,tp)
+	return c:IsLevelAbove(7) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

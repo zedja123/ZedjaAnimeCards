@@ -1,4 +1,5 @@
 --Immortal Class
+local s,id,o=GetID()
 function c200270001.initial_effect(c)
 	-- Tribute 2 monsters to Special Summon 1 Level 7 or higher monster from your Graveyard, ignoring Summoning conditions
 	local e1=Effect.CreateEffect(c)

@@ -20,7 +20,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 
 function s.spfilter(c,e,tp)
-	return c:IsLevelAbove(7) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return c:IsLevelAbove(7)
 end
 
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

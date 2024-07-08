@@ -1,7 +1,7 @@
 --Code Change
 local s,id,o=GetID()
 function c200270002.initial_effect(c)
-	-- Select 1 face-up card on the field whose effect involves a Type(s) of monster and declare a Type. Until the End Phase, the Type(s) mentioned in the selected card's text becomes the declared Type.
+	-- Select 1 face-up card on the field whose effect involves a Type(s) of monster and declare a Type
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ANNOUNCE)
@@ -18,12 +18,19 @@ function s.filter(c)
 end
 
 function s.involvesType(c)
+	-- Checks if the card's effect involves a Type(s) of monster
 	local code=c:GetOriginalCode()
 	local mt=_G["c"..code]
 	if not mt then return false end
-	local e=mt.initial_effect
-	if not e then return false end
-	return e(c):IsExists(Card.IsRace,1,nil,0xffff)
+	local check=false
+	-- Iterate through the effects to check for Type involvement
+	for _,effect in ipairs(mt.initial_effect(c)) do
+		if effect:IsHasCategory(CATEGORY_TYPE_CHANGE) or effect:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
+			check=true
+			break
+		end
+	end
+	return check
 end
 
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

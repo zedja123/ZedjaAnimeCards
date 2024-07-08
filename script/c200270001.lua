@@ -13,10 +13,14 @@ function c200270001.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 
+function s.costfilter(c)
+	return c:IsReleasable() and c:IsType(TYPE_MONSTER)
+end
+
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,2,false,nil,nil) end
-	local sg=Duel.SelectReleaseGroupCost(tp,nil,2,2,false,nil,nil)
-	Duel.Release(sg,REASON_COST)
+	if chk==0 then return Duel.CheckReleaseGroup(tp,s.costfilter,2,nil) end
+	local g=Duel.SelectReleaseGroup(tp,s.costfilter,2,2,nil)
+	Duel.Release(g,REASON_COST)
 end
 
 function s.spfilter(c,e,tp)
